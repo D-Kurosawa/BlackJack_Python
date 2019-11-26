@@ -1,4 +1,5 @@
 """Card module"""
+import random
 
 
 class Card:
@@ -25,3 +26,28 @@ class Card:
 
     def __repr__(self):
         return f"{self.suit}-{self.rank}"
+
+
+class Deck:
+    """
+    :type _CARDS: list[Card]
+    :type cards: list[Card]
+    """
+    _CARDS = [Card(s, r) for s in Card.SUITS for r in Card.RANKS]
+
+    def __init__(self):
+        self.cards = []
+
+    def shuffle(self):
+        self.cards = Deck._CARDS[:]
+        random.shuffle(self.cards)
+
+    def draw(self):
+        """
+        :rtype: Card
+        """
+        try:
+            return self.cards.pop()
+        except IndexError:
+            print('>> Deck is empty!!')
+            raise IndexError
