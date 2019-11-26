@@ -79,7 +79,7 @@ class Player:
         """
         :type deck: Deck
         """
-        while self.score < Player.MAX_SCORE:
+        while self.score < self.__class__.MAX_SCORE:
             is_hit = self.ask('Hit one more card?')
             if is_hit:
                 self.draw(deck)
@@ -102,3 +102,38 @@ class Player:
                 return False
             else:
                 print('>> Please input [y/n]')
+
+
+class Dealer(Player):
+    """
+    :type STAY_SCORE: int
+    """
+    STAY_SCORE = 17
+
+    def deal(self, deck, player):
+        """
+        :type deck: Deck
+        :type player: Player
+        """
+        deck.shuffle()
+        player.__init__()
+        self.__init__()
+
+        for _ in range(2):
+            player.draw(deck)
+            self.draw(deck)
+
+        player.show(deal=True)
+        self.show(deal=True)
+
+    def hit(self, deck):
+        """
+        :type deck: Deck
+        """
+        while self.score < self.__class__.STAY_SCORE:
+            self.draw(deck)
+            self.calculate_score()
+
+
+if __name__ == '__main__':
+    pass
