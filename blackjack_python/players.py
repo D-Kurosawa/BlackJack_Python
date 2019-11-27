@@ -49,7 +49,7 @@ class Player:
 
         return ', '.join(str(card) for card in cards)
 
-    def calculate_score(self):
+    def _calculate_score(self):
         """
         :rtype: int
         """
@@ -66,7 +66,7 @@ class Player:
         """
         :type deal: bool
         """
-        self.calculate_score()
+        self._calculate_score()
 
         if deal and self.__class__.__name__ != Player._NAME:
             print(f"{self.__class__.__name__}(--) : {self._hand(deal)}")
@@ -83,7 +83,7 @@ class Player:
             is_hit = self.ask('Hit one more card?')
             if is_hit:
                 self._draw(deck)
-                self.calculate_score()
+                self._calculate_score()
                 self.show()
             else:
                 break
@@ -132,7 +132,7 @@ class Dealer(Player):
         """
         while self.score < Dealer._STAY_SCORE:
             self._draw(deck)
-            self.calculate_score()
+            self._calculate_score()
 
 
 if __name__ == '__main__':
