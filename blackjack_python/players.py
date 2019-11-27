@@ -79,7 +79,7 @@ class Player:
         """
         :type deck: Deck
         """
-        while self.score < self.__class__.MAX_SCORE:
+        while self.score < Player.MAX_SCORE:
             is_hit = self.ask('Hit one more card?')
             if is_hit:
                 self.draw(deck)
@@ -106,9 +106,9 @@ class Player:
 
 class Dealer(Player):
     """
-    :type STAY_SCORE: int
+    :type _STAY_SCORE: int
     """
-    STAY_SCORE = 17
+    _STAY_SCORE = 17
 
     def deal(self, deck, player):
         """
@@ -130,7 +130,7 @@ class Dealer(Player):
         """
         :type deck: Deck
         """
-        while self.score < self.__class__.STAY_SCORE:
+        while self.score < Dealer._STAY_SCORE:
             self.draw(deck)
             self.calculate_score()
 
