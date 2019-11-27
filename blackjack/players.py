@@ -47,7 +47,7 @@ class Player:
             cards[1] = (cards[1] if self.__class__.__name__ == Player.NAME
                         else '***')
 
-        return ', '.join(repr(card) for card in cards)
+        return ', '.join(str(card) for card in cards)
 
     def calculate_score(self):
         """
