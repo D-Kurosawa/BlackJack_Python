@@ -8,12 +8,12 @@ from .cards import Deck
 @total_ordering
 class Player:
     """
-    :type NAME: str
+    :type _NAME: str
     :type MAX_SCORE: int
     :type hands: list[Card]
     :type score: int
     """
-    NAME = 'Player'
+    _NAME = 'Player'
     MAX_SCORE = 21
 
     def __init__(self):
@@ -30,13 +30,13 @@ class Player:
             return NotImplemented
         return self.score < other.score
 
-    def draw(self, deck):
+    def _draw(self, deck):
         """
         :type deck: Deck
         """
         self.hands.append(deck.draw())
 
-    def hand(self, deal=False):
+    def _hand(self, deal=False):
         """
         :type deal: bool
         :rtype: str
@@ -44,17 +44,17 @@ class Player:
         cards = self.hands[:]
 
         if deal:
-            cards[1] = (cards[1] if self.__class__.__name__ == Player.NAME
+            cards[1] = (cards[1] if self.__class__.__name__ == Player._NAME
                         else '***')
 
         return ', '.join(str(card) for card in cards)
 
-    def calculate_score(self):
+    def _calculate_score(self):
         """
         :rtype: int
         """
         sum_values = sum(card.value for card in self.hands)
-        ace_counter = self.hand().count(Card.RANKS[0])
+        ace_counter = self._hand().count(Card.RANKS[0])
 
         for _ in range(ace_counter):
             if sum_values + 10 <= Player.MAX_SCORE:
@@ -66,24 +66,24 @@ class Player:
         """
         :type deal: bool
         """
-        self.calculate_score()
+        self._calculate_score()
 
-        if deal and self.__class__.__name__ != Player.NAME:
-            print(f"{self.__class__.__name__}(--) : {self.hand(deal)}")
+        if deal and self.__class__.__name__ != Player._NAME:
+            print(f"{self.__class__.__name__}(--) : {self._hand(deal)}")
             return
 
         print(f"{self.__class__.__name__}({self.score:2d}) : "
-              f"{self.hand(deal)}")
+              f"{self._hand(deal)}")
 
     def hit(self, deck):
         """
         :type deck: Deck
         """
-        while self.score < self.__class__.MAX_SCORE:
+        while self.score < Player.MAX_SCORE:
             is_hit = self.ask('Hit one more card?')
             if is_hit:
-                self.draw(deck)
-                self.calculate_score()
+                self._draw(deck)
+                self._calculate_score()
                 self.show()
             else:
                 break
@@ -106,9 +106,9 @@ class Player:
 
 class Dealer(Player):
     """
-    :type STAY_SCORE: int
+    :type _STAY_SCORE: int
     """
-    STAY_SCORE = 17
+    _STAY_SCORE = 17
 
     def deal(self, deck, player):
         """
@@ -120,8 +120,8 @@ class Dealer(Player):
         self.__init__()
 
         for _ in range(2):
-            player.draw(deck)
-            self.draw(deck)
+            player._draw(deck)
+            self._draw(deck)
 
         player.show(deal=True)
         self.show(deal=True)
@@ -130,9 +130,9 @@ class Dealer(Player):
         """
         :type deck: Deck
         """
-        while self.score < self.__class__.STAY_SCORE:
-            self.draw(deck)
-            self.calculate_score()
+        while self.score < Dealer._STAY_SCORE:
+            self._draw(deck)
+            self._calculate_score()
 
 
 if __name__ == '__main__':

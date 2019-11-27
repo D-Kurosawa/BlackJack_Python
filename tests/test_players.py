@@ -21,19 +21,19 @@ def my_deck():
 def test_player(my_deck, capsys):
     player = Player()
 
-    player.draw(my_deck)
-    player.draw(my_deck)
+    player._draw(my_deck)
+    player._draw(my_deck)
     player.show()
     out, err = capsys.readouterr()
     assert out == 'Player(13) : S-A, S-2\n'
 
-    player.draw(my_deck)
-    player.draw(my_deck)
+    player._draw(my_deck)
+    player._draw(my_deck)
     player.show()
     out, err = capsys.readouterr()
     assert out == 'Player(20) : S-A, S-2, S-3, S-4\n'
 
-    player.draw(my_deck)
+    player._draw(my_deck)
     player.show()
     out, err = capsys.readouterr()
     assert out == 'Player(15) : S-A, S-2, S-3, S-4, S-5\n'

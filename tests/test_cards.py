@@ -9,7 +9,7 @@ def my_card():
 
 
 def test_card(my_card):
-    assert repr(my_card) == 'D-A'
+    assert str(my_card) == 'D-A'
 
 
 @pytest.fixture
@@ -22,7 +22,7 @@ def my_deck():
 def draw(my_deck, num):
     draw_cards = []
     for _ in range(num):
-        draw_cards.append(repr(my_deck.draw()))
+        draw_cards.append(str(my_deck.draw()))
 
     return draw_cards
 
