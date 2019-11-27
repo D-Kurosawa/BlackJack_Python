@@ -30,7 +30,7 @@ class Player:
             return NotImplemented
         return self.score < other.score
 
-    def draw(self, deck):
+    def _draw(self, deck):
         """
         :type deck: Deck
         """
@@ -82,7 +82,7 @@ class Player:
         while self.score < Player.MAX_SCORE:
             is_hit = self.ask('Hit one more card?')
             if is_hit:
-                self.draw(deck)
+                self._draw(deck)
                 self.calculate_score()
                 self.show()
             else:
@@ -120,8 +120,8 @@ class Dealer(Player):
         self.__init__()
 
         for _ in range(2):
-            player.draw(deck)
-            self.draw(deck)
+            player._draw(deck)
+            self._draw(deck)
 
         player.show(deal=True)
         self.show(deal=True)
@@ -131,7 +131,7 @@ class Dealer(Player):
         :type deck: Deck
         """
         while self.score < Dealer._STAY_SCORE:
-            self.draw(deck)
+            self._draw(deck)
             self.calculate_score()
 
 
