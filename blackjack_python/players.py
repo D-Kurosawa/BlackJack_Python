@@ -36,7 +36,7 @@ class Player:
         """
         self.hands.append(deck.draw())
 
-    def hand(self, deal=False):
+    def _hand(self, deal=False):
         """
         :type deal: bool
         :rtype: str
@@ -54,7 +54,7 @@ class Player:
         :rtype: int
         """
         sum_values = sum(card.value for card in self.hands)
-        ace_counter = self.hand().count(Card.RANKS[0])
+        ace_counter = self._hand().count(Card.RANKS[0])
 
         for _ in range(ace_counter):
             if sum_values + 10 <= Player.MAX_SCORE:
@@ -69,11 +69,11 @@ class Player:
         self.calculate_score()
 
         if deal and self.__class__.__name__ != Player._NAME:
-            print(f"{self.__class__.__name__}(--) : {self.hand(deal)}")
+            print(f"{self.__class__.__name__}(--) : {self._hand(deal)}")
             return
 
         print(f"{self.__class__.__name__}({self.score:2d}) : "
-              f"{self.hand(deal)}")
+              f"{self._hand(deal)}")
 
     def hit(self, deck):
         """
