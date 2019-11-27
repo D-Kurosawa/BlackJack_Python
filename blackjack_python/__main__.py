@@ -22,7 +22,16 @@ from .players import Player
 
 def main():
     game = BlackJack()
-    game.play()
+
+    print('>> Start Black Jack')
+
+    while True:
+        game.play()
+
+        if not Player.ask('One more game?'):
+            break
+
+    print('>> Finish Black Jack')
 
 
 class BlackJack:
