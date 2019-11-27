@@ -21,11 +21,11 @@ class Card:
         :type rank: str
         """
         self._suit = suit
-        self.rank = rank
+        self._rank = rank
         self.value = Card._VALUES[Card.RANKS.index(rank)]
 
     def __repr__(self):
-        return f"{self._suit}-{self.rank}"
+        return f"{self._suit}-{self._rank}"
 
 
 class Deck:
