@@ -8,12 +8,12 @@ from .cards import Deck
 @total_ordering
 class Player:
     """
-    :type NAME: str
+    :type _NAME: str
     :type MAX_SCORE: int
     :type hands: list[Card]
     :type score: int
     """
-    NAME = 'Player'
+    _NAME = 'Player'
     MAX_SCORE = 21
 
     def __init__(self):
@@ -44,7 +44,7 @@ class Player:
         cards = self.hands[:]
 
         if deal:
-            cards[1] = (cards[1] if self.__class__.__name__ == Player.NAME
+            cards[1] = (cards[1] if self.__class__.__name__ == Player._NAME
                         else '***')
 
         return ', '.join(str(card) for card in cards)
@@ -68,7 +68,7 @@ class Player:
         """
         self.calculate_score()
 
-        if deal and self.__class__.__name__ != Player.NAME:
+        if deal and self.__class__.__name__ != Player._NAME:
             print(f"{self.__class__.__name__}(--) : {self.hand(deal)}")
             return
 
