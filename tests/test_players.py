@@ -1,8 +1,8 @@
 import pytest
 
-from blackjack.cards import Deck
-from blackjack.players import Dealer
-from blackjack.players import Player
+from blackjack_python.cards import Deck
+from blackjack_python.players import Dealer
+from blackjack_python.players import Player
 
 
 class MyDeck(Deck):

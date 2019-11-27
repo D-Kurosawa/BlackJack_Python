@@ -1,8 +1,8 @@
 """Players module"""
 from functools import total_ordering
 
-from blackjack.cards import Card
-from blackjack.cards import Deck
+from .cards import Card
+from .cards import Deck
 
 
 @total_ordering
